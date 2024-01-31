@@ -1,3 +1,22 @@
+class Main extends Phaser.Scene {
+
+    // This function essentially loads things into our game
+    preload() {
+
+    }
+
+    //  it runs once at the beginning of the game and
+    //  allows the user to place the things that they’ve preloaded with preload() and
+    //  create objects within our game such as animations, collision detectors, text, groups, and much more
+    create() {
+
+    }
+
+    // While preload() and create() run only once at the start of the game, update() runs constantly.
+    update() {
+
+    }
+}
 const config = {
     type: Phaser.AUTO,
     width: 400,
@@ -13,3 +32,21 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
+this.load.spritesheet('plane', 'assets/planesheet.png', {frameWidth: 98, frameHeight: 83});
+    this.load.image('pipe', 'assets/pipe.png');
+    this.load.audio('jump', 'assets/jump.wav');
+    //Додаємо літак на сцену
+this.plane = this.physics.add.sprite(0, 0, 'plane')
+//Масштабуємо літак
+this.plane.setScale(0.65, 0.65);
+//Встановлюємо опорну точку літака
+this.plane.setOrigin(0, 0.5);
+this.anims.create({
+    key: "planeAnimation",
+    frames: this.anims.generateFrameNumbers('plane', {frames: [0, 1, 3, 2]}),
+    frameRate: 10,
+    repeat: -1
+});
+this.plane.play("planeAnimation");
+
+this.plane.body.gravity.y = 1000;
