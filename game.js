@@ -36,6 +36,7 @@ this.timedEvent = this.time.addEvent({
     callbackScope: this,
     loop: true
 });
+this.physics.add.overlap(this.plane, this.pipes, this.hitPipe, null, this);
 
     }
 
@@ -79,6 +80,16 @@ addRowOfPipes() {
         if (!(i >= hole && i <= hole + 2))
             this.addOnePipe(400, i * 60 + 10);
     }
+}
+hitPipe () {
+    if (this.plane.alive == false) return;
+
+    this.timedEvent.remove(false);
+    this.plane.alive = false;
+
+    this.pipes.children.each(function(pipe) {
+        pipe.body.velocity.x = 0;
+    });
 }
 }
 const config = {
